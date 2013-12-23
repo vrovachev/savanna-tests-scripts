@@ -110,6 +110,7 @@ if __name__ == "__main__":
     common_func.goodbye_security()
 
 LOGGER.debug('All done !')
+
 print("HDP cluster:\n"
       "Creating:\n"
       "Worker - ['TASKTRACKER', 'DATANODE', 'HDFS_CLIENT', "
