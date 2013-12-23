@@ -44,7 +44,7 @@ class Common():
             LOGGER.debug("Adding keys")
             with open(os.path.expanduser('~/.ssh/id_rsa.pub')) as fpubkey:
                 nova.keypairs.create(name=key_name, public_key=fpubkey.read())
-        flavor = nova.flavors.find(name='m1.small')
+        flavor = nova.flavors.find(name='savanna')
         if not flavor:
             nova.flavors.create('savanna', 2048, 1, 40)
 
