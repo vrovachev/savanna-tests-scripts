@@ -44,8 +44,10 @@ class Common():
             LOGGER.debug("Adding keys")
             with open(os.path.expanduser('~/.ssh/id_rsa.pub')) as fpubkey:
                 nova.keypairs.create(name=key_name, public_key=fpubkey.read())
-        flavor = nova.flavors.find(name='savanna')
-        if not flavor:
+        try:
+            flavor = nova.flavors.find(name='savanna')
+        except:
+            LOGGER.debug("Adding savanna flavor")
             nova.flavors.create('savanna', 2048, 1, 40)
 
     def check_image(self, url, image, md5,
