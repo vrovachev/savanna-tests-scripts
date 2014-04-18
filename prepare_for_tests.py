@@ -99,33 +99,16 @@ if __name__ == "__main__":
     import sys
     controller = (sys.argv[1])
     common_func = Common(controller)
-    common_func.check_image(
-        settings.SERVTEST_SAVANNA_SERVER_URL_1,
-        settings.SERVTEST_SAVANNA_IMAGE_1,
-        settings.SERVTEST_SAVANNA_IMAGE_MD5_1)
-    common_func.check_image(
-        settings.SERVTEST_SAVANNA_SERVER_URL_2,
-        settings.SERVTEST_SAVANNA_IMAGE_2,
-        settings.SERVTEST_SAVANNA_IMAGE_MD5_2)
-    common_func.check_image(
-        settings.SERVTEST_SAVANNA_SERVER_URL_3,
-        settings.SERVTEST_SAVANNA_IMAGE_3,
-        settings.SERVTEST_SAVANNA_IMAGE_MD5_3)
-    common_func.image_import(
-        settings.SERVTEST_SAVANNA_IMAGE_META_1,
-        settings.SERVTEST_LOCAL_PATH,
-        settings.SERVTEST_SAVANNA_IMAGE_1,
-        settings.SERVTEST_SAVANNA_IMAGE_NAME_1)
-    common_func.image_import(
-        settings.SERVTEST_SAVANNA_IMAGE_META_2,
-        settings.SERVTEST_LOCAL_PATH,
-        settings.SERVTEST_SAVANNA_IMAGE_2,
-        settings.SERVTEST_SAVANNA_IMAGE_NAME_2)
-    common_func.image_import(
-        settings.SERVTEST_SAVANNA_IMAGE_META_3,
-        settings.SERVTEST_LOCAL_PATH,
-        settings.SERVTEST_SAVANNA_IMAGE_3,
-        settings.SERVTEST_SAVANNA_IMAGE_NAME_3)
+    for image_info in settings.images:
+        common_func.check_image(
+            image_info['url'],
+            image_info['image'],
+            image_info['md5sum'])
+        common_func.image_import(
+            image_info['meta'],
+            settings.SERVTEST_LOCAL_PATH,
+            image_info['image'],
+            image_info['name'])
     common_func.goodbye_security()
 
 LOGGER.debug('All done !')
