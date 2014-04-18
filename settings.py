@@ -38,5 +38,3 @@ images = [
                  '_savanna_username': 'root'}
     }
 ]
-
-

@@ -57,19 +57,19 @@ class Common():
         LOGGER.debug('Check md5 {0} of image {1}/{2}'.format(md5, path, image))
         if not os.path.isfile(local_path):
             urllib.urlretrieve(download_url, local_path)
-        with open(local_path, mode='rb') as fimage:
-            digits = hashlib.md5()
-            while True:
-                buf = fimage.read(4096)
-                if not buf:
-                    break
-                digits.update(buf)
-            md5_local = digits.hexdigest()
-        if md5_local != md5:
-            LOGGER.debug('MD5 is not correct, download {0} to {1}'.format(
-                         download_url, local_path))
-            urllib.urlretrieve(download_url, local_path)
-        return True
+        if md5:
+            with open(local_path, mode='rb') as fimage:
+                digits = hashlib.md5()
+                while True:
+                    buf = fimage.read(4096)
+                    if not buf:
+                        break
+                    digits.update(buf)
+                md5_local = digits.hexdigest()
+            if md5_local != md5:
+                LOGGER.debug('MD5 is not correct, download {0} to {1}'.format(
+                             download_url, local_path))
+                urllib.urlretrieve(download_url, local_path)
 
     def image_import(self, properties, local_path, image, image_name):
         LOGGER.debug('Import image {0}/{1} to glance'.
