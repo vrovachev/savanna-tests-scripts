@@ -36,6 +36,10 @@ class Common():
                                          from_port=1,
                                          to_port=65535)
         nova.security_group_rules.create(secgroup.id,
+                                         ip_protocol='udp',
+                                         from_port=1,
+                                         to_port=65535)
+        nova.security_group_rules.create(secgroup.id,
                                          ip_protocol='icmp',
                                          from_port=-1,
                                          to_port=-1)
