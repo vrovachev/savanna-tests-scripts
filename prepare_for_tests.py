@@ -31,6 +31,10 @@ class Common():
                           auth_url=auth_url)
         LOGGER.debug('Permit all TCP and ICMP in security group default')
         secgroup = nova.security_groups.find(name='default')
+
+        for rule in secgroup.rules:
+            nova.security_group_rules.delete(rule['id'])
+
         nova.security_group_rules.create(secgroup.id,
                                          ip_protocol='tcp',
                                          from_port=1,
